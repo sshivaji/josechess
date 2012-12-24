@@ -1,0 +1,125 @@
+PROJECT
+-------
+
+Jose Chess 2 is a chess program which you can use to play/store/examine chess
+games and more.
+
+Jose Chess 2 project is based on the project Jose (https://sourceforge.net/projects/jose-chess/)
+originally written by Peter Schaefer (peterschaefer@users.sourceforge.net).
+Unfortunately Peter didn't seem to respond to his e-mail anymore, and neither was any
+maintenance being done to Jose Chess since 2006. This is why Jose Chess 2 was launched.
+
+The project homepage can be found on:
+http://jose-chess2.sourceforge.net/index.html 
+
+At current state the project is compilable in Linux and MS Windows. Other
+operating systems were not tested.
+
+DOWNLOADING
+-----------
+
+The source can be checked out from https://josechess2.svn.sourceforge.net/svnroot/josechess2.
+It contains all source files, .jar files, library files and the compiled Jose.jar
+file (note the capital 'J' in Jose.jar).
+
+This is NOT the installation file. The installation file must be downloaded
+from sourceforge.net for your platform, installed, and ONLY the Jose.jar file
+should be replaced or linked to.
+
+COMPILATION
+-----------
+
+Currently, the program compiles in Linux (Debian Lenny), using Java JDK 1.4,
+JDK 1.5 or JDK 1.6. and the Javac compiler. It does not compile correctly with
+GNU's GJC, but that might be an issue of not calling the compiler correctly.
+In Windows, compilation is done using Java JDK 1.6.
+
+The program runs using JRE 1.5 or JRE 1.6 of Sun's Java. It does
+NOT run with GNU's java interpreter GIJ.
+
+Ant utility (http://ant.apache.org/) is used for compilation of the source tree.
+The build.xml file is contained in the root of the source directory. Calling ant is easy:
+
+ant compile	- compile
+ant jar	- compile build, create .jar file
+ant clean - remove all built and compiled files
+ant clean-build - remove all built files and re-compile the project
+
+You have to review the build.xml file to check if the settings like
+classpath, compiler options and JDK path are correct.
+
+In Windows you can use make.bat and compile.bat batches for one-click compilation but edit
+paths to Ant and JDK in them first too.
+
+CODE
+----
+
+The source code is in a tree like this:
+
+jose
+ |_THIS_FILE
+ |_build.xml
+ |_compile.bat
+ |_make.bat
+ |_src
+ |  |_java
+ |  |  |_ de
+ |  |  |_ org
+ |  |  |_ osbaldeston
+ |  |
+ |  |_c
+ |     |_ ...
+ |     |_ ...
+ |_build
+ |  |_ jar
+ |  |_ ...
+ |_lib
+    |_ ...
+    |_ ...
+
+src: contains Java and C/C++ code. Utilities like Java Launcher are written in C++ but
+fortunately you don't have to compile it and can use the one in the distribution. If
+you wish nevertheless to compile the C-sources as well, some additional configuration and
+makefiles are needed. Which ones must be investigated.
+
+build: contains all compiled files. build/jar contains the Jose.jar file.
+
+lib: holds all additional dependancies jar files. Partially they come from the
+installation of jose, partially they were found on the web and downloaded for compilation.
+
+RUNNING
+-------
+
+To run the newly compiled jar file, create a link from the directory where
+jose was installed originally to this compiled file. The directory structure
+as created during the install cannot be omitted! In Windows you should copy
+the newly created .jar file to the existing Jose directory.
+
+NOTES
+-----
+
+There are some problems with 3D mode. Either it doesn't run at all, or the
+viewport remains white. It happens mainly with older (< 2003 VGA cards). For
+debugging this issue, use these statements:
+export J2D_TRACE_LEVEL=4
+java -Dsun.java2d.opengl=true -jar jose.jar
+
+There is a problem with the slider object in some GTK libraries when running
+in GTK+ look and feel: the slider direction is opposite with the mouse
+direction. E.g. when the mouse moves right, the slider moves left. This was
+fixed this in by reversing the slider in GTK mode. But in some versions now the
+entire slider is reversed, although the movement of the slider is synchronized
+with the mouse.
+
+
+WHAT'S NEW
+----------
+
+1.4.5
+
+<TODO: describe here what was added by you in 1.4.5>
+
+TODO
+----
+
+<TODO: future ideas in a pair of words>

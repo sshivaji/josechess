@@ -1,0 +1,51 @@
+<project basedir="." name="Jose" default="compile">
+	
+  <property value="src/java" name="src.dir" />
+  <property value="lib" name="build.lib" />
+  
+  <property value="build" name="build.dir" />
+  <property value="${build.dir}/classes" name="classes.dir" />
+  <property value="${build.dir}/jar" name="jar.dir" />
+  <property value="de.jose.Main" name="main-class" />
+  <path id="build.classpath" >
+    <fileset includes="**/*.jar" dir="${build.lib}" />
+    <fileset dir="${classes.dir}" />
+  </path>
+  
+  <target name="clean" >
+    <delete dir="${build.dir}" />
+  </target>
+  
+  <target name="compile" >
+    <mkdir dir="${classes.dir}" />
+    <javac destdir="${classes.dir}" srcdir="${src.dir}" >
+
+      <compilerarg value="-g" />
+      <compilerarg value="-verbose" />
+      <compilerarg value="-Xlint:unchecked" />
+<!--
+      <compilerarg value="-Xlint:deprecation" />
+      <compilerarg value="-Xlint:unchecked" />
+-->
+      <classpath refid="build.classpath" />
+    </javac>
+  </target>
+  
+  <target depends="compile" name="jar" >
+    <mkdir dir="${jar.dir}" />
+    <jar basedir="${classes.dir}" destfile="${jar.dir}/${ant.project.name}.jar" >
+      <manifest>
+        <attribute value="${main-class}" name="Main-Class" />
+      </manifest>
+    </jar>
+  </target>
+  
+  <target depends="jar" name="run" >
+    <java fork="true" jar="${jar.dir}/${ant.project.name}.jar" />
+  </target>
+  
+  <target depends="clean,jar" name="clean-build" />
+  
+  <target depends="clean,run" name="main" />
+
+</project>
